@@ -8,4 +8,8 @@ c++ src/isPrime/isPrime.cpp
 printf "Running isPrime in CPP\n"
 time ./a.out
 
+rm a.out
+
+printf "done!"
+
 
