@@ -1,19 +1,41 @@
 #include <iostream>
-#include <string>
 #include "isPrime.h"
 
-bool isPrime(int num)
-{
-    bool flag = true;
-    for (int i = 2; i <= num / 2; i++)
-    {
-        if (num % i == 0)
-        {
-            flag = false;
-            break;
-        }
+int mpow(int b, int e, int m) {
+    int x = 1;
+    while (e > 0) {
+        if (e % 2)
+            x = (x * b) % m;
+        b = (b * b) % m;
+        e /= 2;
     }
-    return flag;
+    return x % m;
+}
+
+bool isPrime(int n) {
+    if (n < 2)
+        return false;
+    if (n == 2)
+        return true;
+    if (n % 2 == 0)
+        return false;
+        
+    int s = n - 1;
+    while (s % 2 == 0)
+        s /= 2;
+        
+    for (int i = 0; i < 10; i++) {
+        int temp = s;
+        int a = rand() % (n - 1) + 1;
+        int mod = mpow(a, temp, n);
+        while (temp != n-1 && mod != 1 && mod != n-1) {
+            mod = (mod * mod) % n;
+            temp *= 2;
+        }
+        if (mod !=n-1 && temp % 2 == 0)
+            return false;
+    }
+    return true;
 }
 
 int main()
